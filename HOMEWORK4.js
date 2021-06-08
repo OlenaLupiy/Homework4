@@ -13,18 +13,21 @@ try {
     }
     
     //Task1.1
-    function calcRectangleArea(width, height){
-        let areaRectanglea = width*height/2;
-       console.log(areaRectanglea);
+    //Task1.1
+function calcRectangleArea(width, height){
+    if (isNaN(width) || isNaN(height)){
+        throw 'Parameter ia not a number'
     }
-    calcRectangleArea(4,8);
-    try{
-    calcRectangleArea();
-    }
-    catch(error){
-        console.log(error.name);
-        console.log(error.message);
-    }
+    return width*height/2;
+}
+
+try{
+alert(calcRectangleArea(3, 'o'));
+}
+catch(error){
+    console.log(error);
+}
+    
     //Task1.3
     function calcRectangleArea(width, height){
         let areaRectanglea = width*height/2;
@@ -52,12 +55,13 @@ try {
         else if(userAge<14 && userAge>0){
             throw new Error('You are too young');
         }
-        else{alert('Welcome')};
-            return userAge;
+        alert('Welcome');
+                    return userAge;
     }
+    console.log(checkAge());
     try {
-        let result = checkAge();
-        console.log(result);
+        
+        сheckAge();
     }
     catch(exception) {
         
@@ -65,55 +69,51 @@ try {
         alert(exception.message);
         console.log(exception.stack);
     }
+
+    // Task 2.1
+
+    function checkAge1(){
+        try{
+        const userAges = prompt('Enter your age', '');
+        if (userAges === ''){
+            throw new Error('The field is empty! Please, enter your age');
+        }
+        else if (isNaN(userAges)){
+            throw new Error('This is not a number');
+        }
+        else if (userAges < 14){
+            throw new Error('You are too small');
+        }
+        alert('Enjoy the movie');
+    }
+    catch(error){
+        alert(error.name+ ''+ error.message)
+    }}
+    checkAge1();
+
      // Task 3
      class MonthException {
-         constructor(nameMonth) {
-             this.month = nameMonth;
+         constructor(message) {
+             this.message = message;
+             this.month = 'MonthException';
          }
-         showMonth(){
-             switch(this.month){
-             case 1:
-                 console.log('January');
-                 break;
-                 case 2:
-                     console.log('February');
-                     break;
-                     case 3:
-                        console.log('March');
-                        break;
-                        case 4:
-                            console.log('April');
-                            break;
-                            case 5:
-                     console.log('FMay');
-                     break;
-                     case 6:
-                     console.log('June');
-                     break;
-                     case 7:
-                     console.log('july');
-                     break;
-                     case 8:
-                     console.log('August');
-                     break;
-                     case 9:
-                     console.log('September');
-                     break;
-                     case 10:
-                     console.log('October');
-                     break;
-                     case 11:
-                     console.log('November');
-                     break;
-                     case 12:
-                     console.log('December');
-                     break;}
+        }
+         function showMonthName(month){
+             month = month-1;
+             let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Jec'];
+             if (months[month] !== undefined){
+                 return months[month];
+             }
+             else {
+                 throw new MonthException('Incorrect month number')
              }
             }
-            let month = new MonthException(2);
-            console.log(month.showMonth());
+             
+            
             try{
-                month.showMonth();
+                let myMonth = 14;
+               let monthName = showMonthName(myMonth);
+               console.log(monthName);
                 
             }
             catch(exception){
@@ -124,28 +124,29 @@ try {
            
     //Task 4
     
-    // function showUser (id){
-    //     let array2 = [];
-    //     for (let i = 0; i < 10; i++) {
-    //    array2.unshift(+prompt('Enter your ID', ''));
-    //       console.log(array2);  
-    // }}
-            
-    //          showUser();  
-                    
     function showUser (id){
-        let array2 = [];
-        let userId = +prompt('Enter your ID', '');      
-          if (userId > 0){
-             
-        array2.push(userId++);
-                
-            }
-            else{console.log('Invalid value');
-       };
-        console.log(array2);    
+        if (id < 0){
+            throw new Error('ID must be not negative' + id);
+        }
+        return {id : id};
     }
-            showUser();  
+                                           
+    function showUsers(ids){
+        let result = [];
+        ids.forEach(function (id) {
+            try {
+                let person = showUser(id);
+                result.push(person);
+            }
+            catch(exception){
+                console.log(exception.message);
+            }
+            
+        });
+          return result;
+    }
+    showUsers([8, 56, 89, -5])      
+            
                     
                     
                     
